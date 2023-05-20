@@ -2,11 +2,16 @@
 
 namespace YupProject.Services
 {
-    internal static class SpotifyApiService
+    internal class SpotifyApiService
     {
-        private static readonly HttpClient _httpClient;
-        private static readonly string _accessToken;
+        private readonly HttpClient _httpClient;
+        private readonly string _accessToken;
 
+        public SpotifyApiService(HttpClient httpClient, string accessToken)
+        {
+            _httpClient = httpClient;
+            _accessToken = accessToken;
+        }
 
 
         public static string GetPlaylistId(string playlistUrl)
@@ -20,7 +25,7 @@ namespace YupProject.Services
             return playlistId;
         }
 
-        public async static Task<string> GetPlaylist(string playlistId,string _accessToken)
+        public async Task<string> GetPlaylist(string playlistId, string _accessToken)
         {
             string url = $"https://api.spotify.com/v1/playlists/{playlistId}";
 

@@ -11,13 +11,15 @@ namespace YupProject
             string clientId = "631f8cbcea9648e799847dca22476346";
             string clientSecret = "be5ec21016984c2ba692516c653b151a";
 
-            var authenticator = new SpotifyAuthenticator(clientId, clientSecret);
+            var SpotifyAuthenticator = new SpotifyAuthenticator(clientId, clientSecret);
+            HttpClient httpClient = new HttpClient();
 
             try
             {
-                string accessToken = await authenticator.GetAcessToken();
+                string accessToken = await SpotifyAuthenticator.GetAcessToken();
                 string playlistId = SpotifyApiService.GetPlaylistId(accessToken);
-                Task<string> playlist = SpotifyApiService.GetPlaylist(playlistId, accessToken);
+                var SpotifyApiRequests = new SpotifyApiService(httpClient, accessToken);
+                Task<string> playlist = SpotifyApiRequests.GetPlaylist(playlistId, accessToken);
 
                 await Console.Out.WriteLineAsync(await playlist);
 
