@@ -20,9 +20,7 @@ namespace YupProject
                 string playlistId = SpotifyApiService.GetPlaylistId(accessToken);
                 var SpotifyApiRequests = new SpotifyApiService(httpClient, accessToken);
                 Task<string> playlist = SpotifyApiRequests.GetPlaylist(playlistId, accessToken);
-
-                await Console.Out.WriteLineAsync(await playlist);
-
+                await Console.Out.WriteLineAsync(playlist);
 
             }
             catch (Exception error)

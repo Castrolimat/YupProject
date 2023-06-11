@@ -20,9 +20,8 @@ namespace YupProject.Services
             playlistUrl = Console.ReadLine();
             int startIndex = playlistUrl.LastIndexOf('/') + 1;
             int endIndex = playlistUrl.LastIndexOf("?");
-            string playlistId = playlistUrl.Substring(startIndex, endIndex - startIndex);
-            Console.WriteLine(playlistId);
-            return playlistId;
+            return playlistUrl.Substring(startIndex, endIndex - startIndex);
+
         }
 
         public async Task<string> GetPlaylist(string playlistId, string _accessToken)
