@@ -1,5 +1,7 @@
-﻿using YupProject.Services;
+﻿using YupProject.Entities;
+using YupProject.Services;
 using YupProject.Services.Authorization;
+
 
 namespace YupProject
 {
@@ -8,10 +10,9 @@ namespace YupProject
 
         static async Task Main(string[] args)
         {
-            string clientId = "631f8cbcea9648e799847dca22476346";
-            string clientSecret = "be5ec21016984c2ba692516c653b151a";
 
-            var SpotifyAuthenticator = new SpotifyAuthenticator(clientId, clientSecret);
+
+            var SpotifyAuthenticator = new SpotifyAuthenticator();
             HttpClient httpClient = new HttpClient();
 
             try
@@ -19,8 +20,9 @@ namespace YupProject
                 string accessToken = await SpotifyAuthenticator.GetAcessToken();
                 string playlistId = SpotifyApiService.GetPlaylistId(accessToken);
                 var SpotifyApiRequests = new SpotifyApiService(httpClient, accessToken);
-                Task<string> playlist = SpotifyApiRequests.GetPlaylist(playlistId, accessToken);
-                await Console.Out.WriteLineAsync(playlist);
+                List<Music> playlist = await SpotifyApiRequests.GetPlaylist(playlistId, accessToken);
+
+
 
             }
             catch (Exception error)
@@ -29,6 +31,9 @@ namespace YupProject
                 throw;
             }
 
+            var authenticator = new YoutubeAuthenticator();
+            string ytplaylistId = authenticator.CreatePlaylist("Teste", "Descrição da minha playlist");
+            Console.WriteLine("Playlist criada com sucesso. ID da playlist: " + ytplaylistId);
 
 
         }

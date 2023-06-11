@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 
 namespace YupProject.Services.Authorization
 {
@@ -12,10 +7,10 @@ namespace YupProject.Services.Authorization
         private readonly string _clientId;
         private readonly string _clientSecret;
 
-        public SpotifyAuthenticator(string clientId, string clientSecret)
+        public SpotifyAuthenticator()
         {
-            _clientId = clientId;
-            _clientSecret = clientSecret;
+            _clientId = "631f8cbcea9648e799847dca22476346";
+            _clientSecret = "be5ec21016984c2ba692516c653b151a";
         }
 
         public async Task<string> GetAcessToken()
