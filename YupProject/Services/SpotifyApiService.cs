@@ -16,10 +16,10 @@ namespace YupProject.Services
         }
 
 
-        public static string GetPlaylistId(string playlistUrl)
+        public string GetPlaylistId()
         {
             Console.Write("Link da playlist: ");
-            playlistUrl = Console.ReadLine();
+            string playlistUrl = Console.ReadLine();
             int startIndex = playlistUrl.LastIndexOf('/') + 1;
             int endIndex = playlistUrl.LastIndexOf("?");
             return playlistUrl.Substring(startIndex, endIndex - startIndex);
@@ -40,11 +40,7 @@ namespace YupProject.Services
 
                 JObject playlistObject = JObject.Parse(playlistJson);
 
-                string filepath = "arquivo.json";
-
-                File.WriteAllText(filepath, playlistObject.ToString());
-
-                List<Music> musicNames = new List<Music>();
+                List<Music> playlist = new List<Music>();
 
                 foreach (var track in playlistObject["tracks"]["items"])
                 {
@@ -54,11 +50,11 @@ namespace YupProject.Services
                     string musicArtist = (string)track["track"]["artists"][0]["name"];
 
                     Music music = new Music(musicName, musicArtist);
-                    musicNames.Add(music);
+                    playlist.Add(music);
 
                 }
 
-                return musicNames;
+                return playlist;
 
             }
             else
