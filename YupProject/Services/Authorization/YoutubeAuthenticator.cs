@@ -2,6 +2,7 @@
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using Google.Apis.YouTube.v3;
+using Newtonsoft.Json.Linq;
 
 namespace YupProject.Services.Authorization
 {
@@ -13,12 +14,15 @@ namespace YupProject.Services.Authorization
 
         public YoutubeAuthenticator()
         {
+            string json = File.ReadAllText(@"credentials.json");
+            JObject obj = JObject.Parse(json);
+
             // Carrega as credenciais do cliente
             UserCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                 new ClientSecrets
                 {
-                    ClientId = "756342637083-50dj5o3km3nadb278ftfqs3h51ed8k5g.apps.googleusercontent.com",
-                    ClientSecret = "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"
+                    ClientId = (string)obj["youtube"]["clientId"],
+                    ClientSecret = (string)obj["youtube"]["clientSecret"]
                 },
                 new[] { YouTubeService.Scope.Youtube },
                 "user",

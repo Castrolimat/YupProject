@@ -17,33 +17,23 @@ namespace YupProject
             YoutubeApiService youtubeApiService = new YoutubeApiService();
             HttpClient httpClient = new HttpClient();
             var spotifyApiService = new SpotifyApiService(httpClient, spotifyAuthenticator.Token);
+            List<Music> playlist = new List<Music>();
 
+            playlist = await spotifyApiService.GetPlaylist(spotifyApiService.GetPlaylistId(), spotifyAuthenticator.Token);
+            int op = 0;
 
-            await Console.Out.WriteAsync("Select an option:\n" +
-                 "1. Youtube to Spotify\n" +
-                 "2. Spotify to Youtube\n" +
-                 "?");
-
-            int option = int.Parse(Console.ReadLine());
-
-            switch (option)
+            do
             {
-                case 1:
-                    break;
+                await Console.Out.WriteAsync("Nome da playlist(Youtube): ");
+                string nomePlaylist = Console.ReadLine();
+                string IdPlaylist = youtubeApiService.CreatePlaylist(nomePlaylist);
+                await youtubeApiService.InsertMusic(playlist, IdPlaylist);
+                await Console.Out.WriteLineAsync("Playlist criada com sucesso!!");
+                await Console.Out.WriteLineAsync("Deseja adicionar outra playlist no youtube? (1) - Sim | 2 (Não)");
+                op = int.Parse(Console.ReadLine());
+            } while (op == 0);
 
-                case 2:
-                    List<Music> playlist = new List<Music>();
-                    playlist = await spotifyApiService.GetPlaylist(spotifyApiService.GetPlaylistId(), spotifyAuthenticator.Token);
 
-                    await Console.Out.WriteAsync("Nome da playlist(Youtube): ");
-                    string nomePlaylist = Console.ReadLine();
-                    string IdPlaylist = youtubeApiService.CreatePlaylist(nomePlaylist);
-                    await youtubeApiService.InsertMusic(playlist, IdPlaylist);
-                    await Console.Out.WriteLineAsync("Playlist criada com sucesso!!");
-                    break;
-
-                default: Console.WriteLine("Opção Inválida!"); break;
-            }
 
 
         }

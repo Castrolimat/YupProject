@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using Newtonsoft.Json.Linq;
+using System.Text.Json;
 
 namespace YupProject.Services.Authorization
 {
@@ -10,8 +11,11 @@ namespace YupProject.Services.Authorization
 
         public SpotifyAuthenticator()
         {
-            ClientId = "631f8cbcea9648e799847dca22476346";
-            ClientSecret = "be5ec21016984c2ba692516c653b151a";
+            string json = File.ReadAllText(@"credentials.json");
+            JObject obj = JObject.Parse(json);
+
+            ClientId = (string)obj["spotify"]["clientId"];
+            ClientSecret = (string)obj["spotify"]["clientSecret"];
         }
 
         public async void GetAcessToken()

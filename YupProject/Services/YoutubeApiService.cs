@@ -52,7 +52,7 @@ namespace YupProject.Services
                         var insertRequest = YoutubeService.PlaylistItems.Insert(playlistItem, "snippet");
                         await insertRequest.ExecuteAsync();
 
-                        Console.WriteLine("Vídeo adicionado à playlist com sucesso!");
+                        Console.WriteLine(music.NameArtist + " adicionado à playlist com sucesso!");
                     }
                     catch (Exception ex)
                     {
