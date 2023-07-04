@@ -20,7 +20,7 @@ namespace YupProject
             List<Music> playlist = new List<Music>();
 
             playlist = await spotifyApiService.GetPlaylist(spotifyApiService.GetPlaylistId(), spotifyAuthenticator.Token);
-            int op = 0;
+            int op = 1;
 
             do
             {
@@ -31,7 +31,7 @@ namespace YupProject
                 await Console.Out.WriteLineAsync("Playlist criada com sucesso!!");
                 await Console.Out.WriteLineAsync("Deseja adicionar outra playlist no youtube? (1) - Sim | 2 (Não)");
                 op = int.Parse(Console.ReadLine());
-            } while (op == 0);
+            } while (op == 1);
 
 
 
