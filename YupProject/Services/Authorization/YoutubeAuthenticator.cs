@@ -14,15 +14,13 @@ namespace YupProject.Services.Authorization
 
         public YoutubeAuthenticator()
         {
-            string json = File.ReadAllText(@"credentials.json");
-            JObject obj = JObject.Parse(json);
 
             // Carrega as credenciais do cliente
             UserCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                 new ClientSecrets
                 {
-                    ClientId = (string)obj["youtube"]["clientId"],
-                    ClientSecret = (string)obj["youtube"]["clientSecret"]
+                    ClientId = "756342637083-ts7cam8ech5np2defjkdce5ta8dp49sm.apps.googleusercontent.com",
+                    ClientSecret = "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"
                 },
                 new[] { YouTubeService.Scope.Youtube },
                 "user",

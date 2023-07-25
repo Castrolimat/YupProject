@@ -11,11 +11,8 @@ namespace YupProject.Services.Authorization
 
         public SpotifyAuthenticator()
         {
-            string json = File.ReadAllText(@"credentials.json");
-            JObject obj = JObject.Parse(json);
-
-            ClientId = (string)obj["spotify"]["clientId"];
-            ClientSecret = (string)obj["spotify"]["clientSecret"];
+            ClientId = "631f8cbcea9648e799847dca22476346";
+            ClientSecret = "a11bf7d36a4e4a528c20bce0cfea1e26";
         }
 
         public async void GetAcessToken()
