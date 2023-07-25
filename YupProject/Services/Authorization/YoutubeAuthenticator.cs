@@ -19,8 +19,8 @@ namespace YupProject.Services.Authorization
             UserCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                 new ClientSecrets
                 {
-                    ClientId = "756342637083-ts7cam8ech5np2defjkdce5ta8dp49sm.apps.googleusercontent.com",
-                    ClientSecret = "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"
+                    ClientId = "",
+                    ClientSecret = ""
                 },
                 new[] { YouTubeService.Scope.Youtube },
                 "user",

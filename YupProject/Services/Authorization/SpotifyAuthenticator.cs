@@ -11,8 +11,8 @@ namespace YupProject.Services.Authorization
 
         public SpotifyAuthenticator()
         {
-            ClientId = "631f8cbcea9648e799847dca22476346";
-            ClientSecret = "a11bf7d36a4e4a528c20bce0cfea1e26";
+            ClientId = "";
+            ClientSecret = "";
         }
 
         public async void GetAcessToken()
